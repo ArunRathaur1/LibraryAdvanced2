@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import logo from '../../assets/People/5.jpeg'
 
 function Navbar(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,8 +45,15 @@ function Navbar(props) {
   return (
     <div className="bg-gradient-to-r from-blue-500 to-blue-500 shadow-md z-50">
       <nav className="container mx-auto px-4 py-3 flex justify-between items-center text-white">
-        {/* Logo / Home Link */}
-        <div>
+        {/* Logo and Home Link */}
+        <div className="flex items-center">
+          {/* Small Logo Image */}
+          <img
+            src={logo} // Replace with your image path
+            alt="Library Logo"
+            className="w-12 h-12 rounded-full mr-3 object-cover" // Adjust size as needed
+          />
+          
           <Link
             className="text-2xl font-bold hover:text-yellow-300 transition duration-300"
             to="/"
@@ -93,7 +101,7 @@ function Navbar(props) {
             View Admin Message
           </button>
           {!isAdminLoggedIn ? (
-            <NavLink to="/adminlogin" onClick={()=>{props.setstudentlogin(false)}} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
+            <NavLink to="/adminlogin" onClick={() => { props.setstudentlogin(false) }} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
               Staff Login
             </NavLink>
           ) : (
@@ -134,10 +142,10 @@ function Navbar(props) {
                 View Admin Message
               </button>
               <NavLink to="/studentLogin" className={({ isActive }) => `text-gray-800 text-lg  hover:text-blue-500 transition duration-300 ${isActive ? 'underline' : ''}`}>
-                {!props.studnetlogin ? <span>Student Login</span> : <span onClick={()=>{props.setstudentlogin(false)}} >Logout</span>}
+                {!props.studnetlogin ? <span>Student Login</span> : <span onClick={() => { props.setstudentlogin(false) }} >Logout</span>}
               </NavLink>
               {!isAdminLoggedIn ? (
-                <NavLink to="/adminlogin" onClick={()=>{props.setstudentlogin(false)}} className={({ isActive }) => ` text-gray-800 text-lg  hover:text-blue-500 transition duration-300 ${isActive ? 'underline' : ''}`}>
+                <NavLink to="/adminlogin" onClick={() => { props.setstudentlogin(false) }} className={({ isActive }) => ` text-gray-800 text-lg  hover:text-blue-500 transition duration-300 ${isActive ? 'underline' : ''}`}>
                   Admin-Login
                 </NavLink>
               ) : (
