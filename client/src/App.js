@@ -4,7 +4,7 @@ import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
 import BookSearch from './components/BookSearch';
 import Home from './components/Home';
-import Navbar from './components/Navbar';
+import Navbar from './components/MainHome/Navbar';
 import Info from './components/Info';
 import IssueBooks from './components/Issue/IssueBooks';
 // import BookDetails from './components/Books/BookDetails';
@@ -23,6 +23,7 @@ import StudentDashboard from './components/StudentLogin/studentDashboard';
 import StudentDetails from './components/Students/studentDetails';
 import PostMessage from './components/Admin/PostMessage';
 import FeePayment from './components/Admin/FeePayment';
+import MainHome from './components/MainHome/Home';
 // import SendOverdueEmailsButton from './components/SendOverdueEmailsButton';
 
 const App = () => {
@@ -36,9 +37,9 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Navbar studnetlogin={studnetlogin} setstudentlogin={setstudentlogin} />
+      <Navbar studnetlogin={studnetlogin} setstudentlogin={setstudentlogin} />
         <Routes>
-          <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<MainHome />} />
           <Route exact path="/adminlogin" element={<AdminLogin setKey={setKey}/>} />
           <Route path="/dashboard" element={<AdminDashboard  key={key}/>}> 
               <Route path="addadmin" element={<AddAdmin/>} />

@@ -51,7 +51,7 @@ function Navbar(props) {
             to="/"
             onClick={handleLogout}
           >
-            JILA GRANTHALAYA
+            Chhattisgarh Library System
           </Link>
         </div>
 
@@ -80,14 +80,6 @@ function Navbar(props) {
           <NavLink to="/info" onClick={handleLogout} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
             Info
           </NavLink>
-          <a
-            href="https://maps.app.goo.gl/4j1uxy8NepLz4ShJ8"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-lg hover:text-yellow-300 transition duration-300"
-          >
-            To Know the Location
-          </a>
           <NavLink to="/studentLogin" onClick={handleLogout} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
             {!props.studnetlogin ? <span>Student Login</span> : <span>Logout</span>}
           </NavLink>
@@ -98,6 +90,15 @@ function Navbar(props) {
             View Admin Message
           </button>
           {!isAdminLoggedIn ? (
+            <NavLink to="/adminlogin" onClick={()=>{props.setstudentlogin(false)}} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
+              Staff Login
+            </NavLink>
+          ) : (
+            <button onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+              Logout
+            </button>
+          )}
+          {true? (
             <NavLink to="/adminlogin" onClick={()=>{props.setstudentlogin(false)}} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
               Admin-Login
             </NavLink>
