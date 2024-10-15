@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-const StaffLogin = (props) => {
+const AdminLoginMain = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -10,7 +10,7 @@ const StaffLogin = (props) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const token = Cookies.get('authToken');
-    const response = await fetch('http://localhost:5000/library/admin/login', {
+    const response = await fetch('http://localhost:5000/library//admin-main-login', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json' ,
@@ -22,7 +22,7 @@ const StaffLogin = (props) => {
     if (response.ok) {
       // Store the token in a cookie
       Cookies.set('authToken', data.token, { expires: 7 }); // Cookie expires in 7 days
-      navigate('/dashboard/bookdetails'); // Redirect to the specified page
+      navigate('/adminmainhome'); // Redirect to the specified page
     } else {
       setErrorMessage(data.message); // Set error message if login fails
     }
@@ -32,7 +32,7 @@ const StaffLogin = (props) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Staff Login</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Admin Login</h2>
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <input
@@ -69,4 +69,4 @@ const StaffLogin = (props) => {
   );
 };
 
-export default StaffLogin;
+export default AdminLoginMain;

@@ -24,6 +24,9 @@ import StudentDetails from './components/Students/studentDetails';
 import PostMessage from './components/Admin/PostMessage';
 import FeePayment from './components/Admin/FeePayment';
 import MainHome from './components/MainHome/Home';
+import CreateLibrary from './components/createLibrary/createLibrary';
+import AdminLoginMain from './components/adminmainlogin';
+import AdminMainHome from './components/AdminMain/AdminMainHome';
 // import SendOverdueEmailsButton from './components/SendOverdueEmailsButton';
 
 const App = () => {
@@ -56,11 +59,16 @@ const App = () => {
               <Route path='showStudentDetail' element={<StudentDetails student={studentdatatoadmin} ></StudentDetails>}></Route>
               {/* <Route path="overdue" element={<SendOverdueEmailsButton/>} /> */}
           </Route>
+          <Route path='/adminmainhome' element={<AdminMainHome></AdminMainHome>} >
+                  <Route path="addlibrary" element={<CreateLibrary />} />   
+          </Route>
           <Route path="/booksearch" element={<BookSearch/>} />
           <Route path="/studentbookhistory" element={<StudentBookHistory/>} />
           <Route path="/info" element={<Info />} />
           <Route path='/studentLogin' element={<StudentLogin setdetails={setdetails} setstudentlogin={setstudentlogin}></StudentLogin>}></Route>
           <Route path='/studentDashboard' element={<StudentDashboard student={student} ></StudentDashboard>}></Route>
+          
+          <Route path="/adminmainlogin" element={<AdminLoginMain />} />
         </Routes>
       </div>
     </Router>

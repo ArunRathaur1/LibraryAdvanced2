@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 // const libraryRoutes = require('./routes/Library');
 const adminRoutes=require('./routes/admin');
 const student=require('./routes/student');
+const adminmain=require('./routes/admin_main');
 const books=require('./routes/books');
 require('dotenv').config(); // Load environment variables
 
@@ -30,5 +31,6 @@ app.use(bodyParser.json());
 app.use('/library',adminRoutes);
 app.use('/library',student);
 app.use('/library',books);
+app.use('/library',adminmain);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
