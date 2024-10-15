@@ -30,6 +30,7 @@ import AdminMainHome from './components/AdminMain/AdminMainHome';
 import AddAdminMain from './components/AdminMain/AddAdminMain';
 import ShowLibraries from './components/AdminMain/ShowLibraries';
 import AddHead from './components/AdminMain/AddHead';
+import BookSearchAll from './components/BookSearchAll';
 // import SendOverdueEmailsButton from './components/SendOverdueEmailsButton';
 
 const App = () => {
@@ -74,7 +75,7 @@ const App = () => {
           <Route path="/info" element={<Info />} />
           <Route path='/studentLogin' element={<StudentLogin setdetails={setdetails} setstudentlogin={setstudentlogin}></StudentLogin>}></Route>
           <Route path='/studentDashboard' element={<StudentDashboard student={student} ></StudentDashboard>}></Route>
-          
+          <Route path="/booksearchall" element={<BookSearchAll/>} />
           <Route path="/adminmainlogin" element={<AdminLoginMain />} />
         </Routes>
       </div>
