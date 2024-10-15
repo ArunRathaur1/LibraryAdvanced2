@@ -16,6 +16,7 @@ import cto2 from '../../assets/People/collector2.jpeg';
 import kedar from '../../assets/People/kedar.jpg';
 import maps from '../../assets/People/maps.png';
 import logo from '../../assets/People/5.jpeg';
+import axios from 'axios';
 
 const images = [img1, img2, img3, img4, img6, img7, img8, img9, img10];
 
@@ -28,6 +29,7 @@ const districts = [
 
 export default function MainHome() {
   const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [libraries, setLibraries] = useState([]);
   const sliderRef = useRef(null);
 
   const settings = {
@@ -40,9 +42,18 @@ export default function MainHome() {
     slidesToScroll: 1,
   };
 
-  const handleDistrictChange = (e) => {
-    setSelectedDistrict(e.target.value);
+  const handleDistrictChange = async (e) => {
+    const district = e.target.value;
+    setSelectedDistrict(district);
+
+    try {
+      const response = await axios.get(`http://localhost:5000/library/libraries?city=${district}`);
+      setLibraries(response.data); // Set the libraries fetched from the server
+    } catch (error) {
+      console.error('Error fetching libraries:', error);
+    }
   };
+
 
   const handleNext = () => {
     sliderRef.current.slickNext();
@@ -144,11 +155,19 @@ export default function MainHome() {
           ))}
         </select>
 
-        {/* Display the selected district */}
-        {selectedDistrict && (
+        {/* Display libraries of the selected district */}
+        {libraries.length > 0 ? (
           <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
-            <h3 className="text-lg font-semibold">Selected City:</h3>
-            <p>{selectedDistrict}</p>
+            <h3 className="text-lg font-semibold">Libraries in {selectedDistrict}:</h3>
+            <ul>
+              {libraries.map((library, index) => (
+                <li key={index} className="mt-2">{library.libraryName}</li>
+              ))}
+            </ul>
+          </div>
+        ) : selectedDistrict && (
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
+            <p>No libraries found in {selectedDistrict}.</p>
           </div>
         )}
       </div>

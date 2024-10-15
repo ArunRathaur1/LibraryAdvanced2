@@ -144,6 +144,17 @@ router.get('/librariesData', async (req, res) => {
   }
 });
 
+router.get('/libraries', async (req, res) => {
+  const city = req.query.city; // Use query parameter instead of path parameter
+  try {
+    const libraries = await Library.find({ libraryCity: city });
+    res.status(200).json(libraries);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching libraries', error });
+  }
+});
+
+
 
 
 
