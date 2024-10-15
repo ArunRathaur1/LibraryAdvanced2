@@ -99,7 +99,7 @@ function Navbar(props) {
             </button>
           )}
           {true? (
-            <NavLink to="/adminlogin" onClick={()=>{props.setstudentlogin(false)}} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
+            <NavLink onClick={()=>{props.setstudentlogin(false)}}>
               Admin-Login
             </NavLink>
           ) : (

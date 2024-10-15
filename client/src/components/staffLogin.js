@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-const AdminLogin = (props) => {
+const StaffLogin = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -69,4 +69,4 @@ const AdminLogin = (props) => {
   );
 };
 
-export default AdminLogin;
+export default StaffLogin;

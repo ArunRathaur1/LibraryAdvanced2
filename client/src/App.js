@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AdminLogin from './components/AdminLogin';
+import StaffLogin from './components/staffLogin';
 import AdminDashboard from './components/AdminDashboard';
 import BookSearch from './components/BookSearch';
 import Home from './components/Home';
@@ -40,7 +40,7 @@ const App = () => {
       <Navbar studnetlogin={studnetlogin} setstudentlogin={setstudentlogin} />
         <Routes>
         <Route exact path="/" element={<MainHome />} />
-          <Route exact path="/adminlogin" element={<AdminLogin setKey={setKey}/>} />
+          <Route exact path="/adminlogin" element={<StaffLogin setKey={setKey}/>} />
           <Route path="/dashboard" element={<AdminDashboard  key={key}/>}> 
               <Route path="addadmin" element={<AddAdmin/>} />
               <Route path="issuebooks" element={<IssueBooks />} />
