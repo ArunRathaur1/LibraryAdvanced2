@@ -6,6 +6,7 @@ const Admin=require('../models/Admin');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { route } = require('./admin');
+const verifyAdmin = require('../middleware/checkadmin');
 // const fs=required('fs');
 const router = express.Router();
 require('dotenv').config();
@@ -88,14 +89,18 @@ require('dotenv').config();
 //   }
 // }
 
-router.get('/students', async (req, res) => {
-    try {
-      const student = await Student.find(); // Fetch all books from the database
-      res.json(student);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching student', error: error.message });
-    }
-  });
+router.get('/students', verifyAdmin, async (req, res) => {
+  try {
+    // Retrieve the libraryId from the admin making the request
+    const libraryId = req.admin.libraryId;
+
+    // Fetch all students associated with the libraryId
+    const students = await Student.find({ libraryId }); 
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching students', error: error.message });
+  }
+});
 
   router.post('/students/history1', async (req, res) => {
     const { student_id, password } = req.body; // Get student ID and password from the request body

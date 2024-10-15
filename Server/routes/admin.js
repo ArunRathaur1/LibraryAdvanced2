@@ -126,8 +126,11 @@ router.post('/admin/login', async (req, res) => {
 
 // Admin-only routes to manage books and students
 // Route to add a new book
-router.post('/books',verifyAdmin, async (req, res) => {
+router.post('/books', verifyAdmin, async (req, res) => {
   const { title, author, genre, isbn, published_date } = req.body;
+  
+  // Retrieve libraryId from the admin who is making the request
+  const libraryId = req.admin.libraryId;
 
   try {
     // Check if a book with the same ISBN already exists
@@ -136,8 +139,16 @@ router.post('/books',verifyAdmin, async (req, res) => {
       return res.status(400).json({ message: 'This book already exists in the library.' });
     }
 
-    // If not, create a new book
-    const newBook = new Book({ title, author, genre, isbn, published_date });
+    // If not, create a new book with libraryId
+    const newBook = new Book({ 
+      title, 
+      author, 
+      genre, 
+      isbn, 
+      published_date, 
+      libraryId // Store the libraryId with the book details
+    });
+
     await newBook.save();
 
     res.status(201).json({ message: 'Book added successfully', book: newBook });
@@ -146,6 +157,7 @@ router.post('/books',verifyAdmin, async (req, res) => {
     res.status(500).json({ message: 'Internal server error', error: error.message });
   }
 });
+
 
 router.put('/books/:id',verifyAdmin, async (req, res) => {
     const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -187,16 +199,20 @@ router.post('/students', verifyAdmin, async (req, res) => {
     // Set the current date as the entry date
     const entrydate = new Date(); // Automatically capture the entry date
 
-    // Create a new student with the hashed password and entry date
+    // Get the libraryId from the admin object attached by the verifyAdmin middleware
+    const libraryId = req.admin.libraryId; // Access the libraryId directly from req.admin
+
+    // Create a new student with the hashed password, entry date, and library ID
     const newStudent = new Student({
       name,
       phone,
       address,
       student_id,
       email,
-      entrydate:entrydate, // Add the entry date to the student model
+      entrydate: entrydate, // Add the entry date to the student model
       password: hashedPassword, // Store the hashed password
-      feeStatus: { paymentDuration: 'Not paid', lastPaymentDate: new Date() },// Set a default fee status if required
+      feeStatus: { paymentDuration: 'Not paid', lastPaymentDate: new Date() }, // Set a default fee status if required
+      libraryId: libraryId // Store the libraryId with the student data
     });
 
     await newStudent.save();
@@ -210,6 +226,7 @@ router.post('/students', verifyAdmin, async (req, res) => {
     res.status(500).json({ message: 'Internal server error', error: error.message });
   }
 });
+
 
   
 router.put('/students/:id', verifyAdmin, async (req, res) => {
@@ -238,9 +255,10 @@ router.put('/students/:id', verifyAdmin, async (req, res) => {
     res.json({ message: 'Student deleted successfully' });
   });
 
-  router.get('/students/issued',verifyAdmin, async (req, res) => {
+  router.get('/students/issued', verifyAdmin, async (req, res) => {
     try {
-      const students = await Student.find().populate({
+      // Find students with the same libraryId as the admin
+      const students = await Student.find({ libraryId: req.admin.libraryId }).populate({
         path: 'issued_books',
         select: 'title author isbn issueDate' // Include issueDate in the response
       });

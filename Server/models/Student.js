@@ -23,7 +23,8 @@ const studentSchema = new mongoose.Schema({
     book: { type: mongoose.Schema.Types.ObjectId, ref: 'Book' }, // book reference
     issueDate: { type: Date }, // issue date
     returnDate: { type: Date }  // return date
-  }]
+  }],
+  libraryId: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Student', studentSchema);

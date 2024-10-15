@@ -3,20 +3,22 @@ const Book = require('../models/Book');
 const Student = require('../models/Student');
 const Admin=require('../models/Admin');
 const router = express.Router();
+const verifyAdmin = require('../middleware/checkadmin');
 require('dotenv').config();
 
-router.get('/books', async (req, res) => {
-    try {
-      const books = await Book.find(); // Fetch all books from the database
-      res.json(books);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching books', error: error.message });
-    }
-  });
+router.get('/books', verifyAdmin, async (req, res) => {
+  try {
+    // Retrieve the libraryId from the admin making the request
+    const libraryId = req.admin.libraryId;
 
-  router.get('/books/search', async (req, res) => {
-    const books = await Book.find({ genre: req.query.genre });
+    // Fetch all books that belong to the same libraryId
+    const books = await Book.find({ libraryId }); 
     res.json(books);
-  });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching books', error: error.message });
+  }
+});
+
+
 
 module.exports=router;

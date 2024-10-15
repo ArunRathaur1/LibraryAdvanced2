@@ -15,7 +15,8 @@ const bookSchema = new mongoose.Schema({
   issueDate: { 
     type: Date, 
     // default: null // This will be set when the book is issued
-  },deleted: { type: Boolean, default: false }
+  },deleted: { type: Boolean, default: false },
+  libraryId: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Book', bookSchema);
