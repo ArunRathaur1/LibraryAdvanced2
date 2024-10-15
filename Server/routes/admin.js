@@ -84,38 +84,44 @@ router.delete('/delete-admin', verifyAdmin, async (req, res) => {
 
 
   // Admin login route
-  router.post('/admin/login', async (req, res) => {
-    const { username, password } = req.body;
-  
-    try {
+router.post('/admin/login', async (req, res) => {
+  const { username, password, libraryId } = req.body; // Include libraryId in the request body
+
+  try {
       // Check if an admin with the provided username exists
       const admin = await Admin.findOne({ username });
-  
+
       // If admin doesn't exist, return an error
       if (!admin) {
-        return res.status(401).json({ message: 'Invalid credentials', isAdmin: false });
+          return res.status(401).json({ message: 'Invalid credentials', isAdmin: false });
       }
-  
+
+      // Check if the provided libraryId matches the admin's libraryId
+      if (admin.libraryId !== libraryId) {
+          return res.status(401).json({ message: 'Invalid credentials', isAdmin: false });
+      }
+
       // Check if the provided password matches the hashed password in the database
       const isMatch = await bcrypt.compare(password, admin.password);
       if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid credentials', isAdmin: false });
+          return res.status(401).json({ message: 'Invalid credentials', isAdmin: false });
       }
-  
+
       // Create a JWT token
       const token = jwt.sign(
-        { id: admin._id, isAdmin: true }, // Payload with admin ID and role
-        process.env.JWT_SECRET, // Secret key from environment variables
-        { expiresIn: '7d' } // Token expiration time
+          { id: admin._id, isAdmin: true }, // Payload with admin ID and role
+          process.env.JWT_SECRET, // Secret key from environment variables
+          { expiresIn: '7d' } // Token expiration time
       );
-  
+
       // Return the token to the frontend
       return res.json({ message: 'Login successful', token });
-    } catch (error) {
+  } catch (error) {
       console.error('Error logging in:', error);
       return res.status(500).json({ message: 'Server error' });
-    }
-  });
+  }
+});
+
   
 
 // Admin-only routes to manage books and students
@@ -592,6 +598,75 @@ router.post('/whatsappmessage', async (req, res) => {
     }
   });
   
-  
+  // Route to add an admin
+router.post('/addhead', async (req, res) => {
+  const { username, password, libraryId } = req.body;
+
+  try {
+      // Check if the username already exists
+      const existingAdmin = await Admin.findOne({ username });
+      if (existingAdmin) {
+          return res.status(400).json({ message: 'Admin with this username already exists.' });
+      }
+
+      // Check if the libraryId is already associated with an existing admin
+      const existingLibraryId = await Admin.findOne({ libraryId });
+      if (existingLibraryId) {
+          return res.status(400).json({ message: 'Admin with this library ID already exists.' });
+      }
+
+      // Hash the password using bcryptjs
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      // Create new admin with the hashed password
+      const newAdmin = new Admin({ username, password: hashedPassword, libraryId });
+      await newAdmin.save();
+
+      // Generate a JWT token
+      const token = jwt.sign(
+          { id: newAdmin._id }, // Payload: contains admin's ID
+          process.env.JWT_SECRET, // Secret key
+          { expiresIn: '7d' } // Token expiration time
+      );
+
+      res.status(201).json({ message: 'Admin added successfully!', token });
+  } catch (error) {
+      console.error('Error adding admin:', error);
+      res.status(500).json({ message: 'Server error. Please try again later.' });
+  }
+});
+
+// Route to delete an admin
+router.delete('/deletehead', async (req, res) => {
+  const { username, password, libraryId } = req.body; // Get username, password, and libraryId from the request body
+
+  try {
+      // Check if there are more than one admins in the database
+      const adminCount = await Admin.countDocuments();
+      if (adminCount === 1) {
+          return res.status(400).json({ message: 'Unable to delete the admin. At least one admin must be present.' });
+      }
+
+      // Check if the admin exists with the given username and libraryId
+      const admin = await Admin.findOne({ username, libraryId });
+      if (!admin) {
+          return res.status(404).json({ message: 'Admin not found with the provided username and library ID.' });
+      }
+
+      // Validate the password using bcrypt
+      const isMatch = await bcrypt.compare(password, admin.password);
+      if (!isMatch) {
+          return res.status(403).json({ message: 'Incorrect password.' });
+      }
+
+      // If username, password, and libraryId are correct, delete the admin
+      await Admin.deleteOne({ username: username, libraryId: libraryId });
+      res.status(200).json({ message: 'Admin deleted successfully!' });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error occurred while deleting admin.' });
+  }
+});
 
   module.exports=router;

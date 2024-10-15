@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+
 const StaffLogin = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [libraryId, setLibraryId] = useState(''); // New state for libraryId
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const token = Cookies.get('authToken');
     const response = await fetch('http://localhost:5000/library/admin/login', {
       method: 'POST',
       headers: { 
-        'Content-Type': 'application/json' ,
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password, libraryId }), // Include libraryId in the request body
     });
 
     const data = await response.json();
@@ -27,7 +28,6 @@ const StaffLogin = (props) => {
       setErrorMessage(data.message); // Set error message if login fails
     }
   };
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -49,6 +49,15 @@ const StaffLogin = (props) => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Library ID"
+              value={libraryId}
+              onChange={(e) => setLibraryId(e.target.value)} // Update libraryId state
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>

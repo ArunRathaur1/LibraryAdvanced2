@@ -9,7 +9,7 @@ const AdminLoginMain = (props) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const token = Cookies.get('authToken');
+    
     const response = await fetch('http://localhost:5000/library//admin-main-login', {
       method: 'POST',
       headers: { 
@@ -21,7 +21,7 @@ const AdminLoginMain = (props) => {
     const data = await response.json();
     if (response.ok) {
       // Store the token in a cookie
-      Cookies.set('authToken', data.token, { expires: 7 }); // Cookie expires in 7 days
+      Cookies.set('authTokenmain', data.token, { expires: 7 }); // Cookie expires in 7 days
       navigate('/adminmainhome'); // Redirect to the specified page
     } else {
       setErrorMessage(data.message); // Set error message if login fails

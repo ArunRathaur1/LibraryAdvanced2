@@ -27,6 +27,9 @@ import MainHome from './components/MainHome/Home';
 import CreateLibrary from './components/createLibrary/createLibrary';
 import AdminLoginMain from './components/adminmainlogin';
 import AdminMainHome from './components/AdminMain/AdminMainHome';
+import AddAdminMain from './components/AdminMain/AddAdminMain';
+import ShowLibraries from './components/AdminMain/ShowLibraries';
+import AddHead from './components/AdminMain/AddHead';
 // import SendOverdueEmailsButton from './components/SendOverdueEmailsButton';
 
 const App = () => {
@@ -60,7 +63,11 @@ const App = () => {
               {/* <Route path="overdue" element={<SendOverdueEmailsButton/>} /> */}
           </Route>
           <Route path='/adminmainhome' element={<AdminMainHome></AdminMainHome>} >
-                  <Route path="addlibrary" element={<CreateLibrary />} />   
+                  <Route path="addlibrary" element={<CreateLibrary />} /> 
+                  <Route path="addadmin" element={<AddAdminMain />} />
+                  <Route path="showlibraries" element={<ShowLibraries />} />
+                  <Route path="addhead" element={<AddHead />} />
+                    
           </Route>
           <Route path="/booksearch" element={<BookSearch/>} />
           <Route path="/studentbookhistory" element={<StudentBookHistory/>} />
