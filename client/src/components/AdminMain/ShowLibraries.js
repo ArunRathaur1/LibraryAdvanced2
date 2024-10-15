@@ -5,7 +5,7 @@ export default function ShowLibraries() {
   const [libraries, setLibraries] = useState([]); // State to hold library data
   const [filteredLibraries, setFilteredLibraries] = useState([]); // State for filtered library data
   const [error, setError] = useState(null); // State to hold error messages
-  const [searchName, setSearchName] = useState(''); // State for search by librarian name
+  const [searchCity, setSearchCity] = useState(''); // State for search by librarian name
   const [searchUniqueId, setSearchUniqueId] = useState(''); // State for search by unique ID
 
   useEffect(() => {
@@ -29,9 +29,9 @@ export default function ShowLibraries() {
   // Function to filter libraries based on input values
   const filterLibraries = () => {
     const filtered = libraries.filter(library => {
-      const matchesName = library.librarianName.toLowerCase().includes(searchName.toLowerCase());
+      const matchesCity = library.libraryCity.toLowerCase().includes(searchCity.toLowerCase());
       const matchesUniqueId = library.uniqueId ? library.uniqueId.toString().includes(searchUniqueId) : searchUniqueId === '';
-      return matchesName && matchesUniqueId;
+      return matchesCity && matchesUniqueId;
     });
 
     setFilteredLibraries(filtered);
@@ -40,7 +40,7 @@ export default function ShowLibraries() {
   // Call the filter function whenever search inputs change
   useEffect(() => {
     filterLibraries();
-  }, [searchName, searchUniqueId]); // Dependency array includes search inputs
+  }, [searchCity, searchUniqueId]); // Dependency array includes search inputs
 
   return (
     <div className="container mx-auto p-6">
@@ -51,9 +51,9 @@ export default function ShowLibraries() {
       <div className="mb-4 flex justify-center space-x-4">
         <input
           type="text"
-          placeholder="Search by Librarian Name"
-          value={searchName}
-          onChange={(e) => setSearchName(e.target.value)}
+          placeholder="Search by City Name"
+          value={searchCity}
+          onChange={(e) => setSearchCity(e.target.value)}
           className="border border-gray-300 rounded-lg p-2"
         />
         <input
