@@ -33,7 +33,7 @@ function Navbar(props) {
 
   const handleDisplayMessage = async () => {
     try {
-      const response = await fetch('http://localhost:5000/library/message'); // Update with actual endpoint
+      const response = await fetch('http://localhost:5000/library/message');
       if (response.ok) {
         const data = await response.json();
         setAdminMessage(data.message);
@@ -48,16 +48,15 @@ function Navbar(props) {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-blue-500 shadow-md z-50">
-      <nav className="container mx-auto px-4 py-3 flex justify-between items-center text-white">
+    <div className="bg-gradient-to-r from-blue-500 to-blue-500 shadow-md z-10">
+      <nav className="container mx-auto px-4 py-3 flex justify-between items-center text-white relative z-10">
         {/* Logo and Home Link */}
         <div className="flex items-center">
           <img
-            src={logo} // Replace with your image path
+            src={logo}
             alt="Library Logo"
-            className="w-12 h-12 rounded-full mr-3 object-cover" // Adjust size as needed
+            className="w-12 h-12 rounded-full mr-3 object-cover"
           />
-          
           <Link
             className="text-2xl font-bold hover:text-yellow-300 transition duration-300"
             to="/"
@@ -77,32 +76,24 @@ function Navbar(props) {
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              ></path>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
           </button>
         </div>
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-8">
-          {/* <NavLink to="/info" onClick={handleLogout} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
-            Info
-          </NavLink> */}
-          <NavLink to="/studentLogin" onClick={handleLogout} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
-            {!props.studnetlogin ? <span>Student Login</span> : <span>Logout</span>}
+          <NavLink to="/studentLogin" onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+            {!props.studnetlogin ? 'Student Login' : 'Logout'}
           </NavLink>
-          <NavLink to="/booksearchall" onClick={handleLogout} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
+          <NavLink to="/booksearchall" className="text-lg hover:text-yellow-300 transition duration-300">
             Book-Search
           </NavLink>
           <button onClick={handleDisplayMessage} className="text-lg hover:text-yellow-300 transition duration-300">
             View Admin Message
           </button>
           {!isStaffLoggedIn ? (
-            <NavLink to="/adminlogin" onClick={() => { props.setstudentlogin(false); }} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
+            <NavLink to="/adminlogin" className="text-lg hover:text-yellow-300 transition duration-300">
               Staff Login
             </NavLink>
           ) : (
@@ -111,7 +102,7 @@ function Navbar(props) {
             </button>
           )}
           {!isAdminLoggedIn ? (
-            <NavLink to="/adminmainlogin" onClick={() => { props.setstudentlogin(false); }} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
+            <NavLink to="/adminmainlogin" className="text-lg hover:text-yellow-300 transition duration-300">
               Admin-Login
             </NavLink>
           ) : (
@@ -123,41 +114,36 @@ function Navbar(props) {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-60">
-            <div className="flex flex-col items-center py-4 space-y-4">
-              <NavLink to="/info" onClick={handleLogout} className={({ isActive }) => `text-gray-800 text-lg hover:text-blue-500 transition duration-300 ${isActive ? 'underline' : ''}`}>
-                Info
+          <div className="lg:hidden absolute top-16 left-0 w-full bg-blue-500 shadow-lg z-10">
+            <div className="flex flex-col items-center py-4 space-y-4 text-white">
+              <NavLink to="/studentLogin" onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+                {!props.studnetlogin ? 'Student Login' : 'Logout'}
               </NavLink>
-              <NavLink to="/booksearch" onClick={handleLogout} className={({ isActive }) => `text-gray-800 text-lg hover:text-blue-500 transition duration-300 ${isActive ? 'underline' : ''}`}>
+              <NavLink to="/booksearchall" className="text-lg hover:text-yellow-300 transition duration-300">
                 Book-Search
               </NavLink>
-              <a
-                href="https://maps.app.goo.gl/4j1uxy8NepLz4ShJ8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-800 text-lg hover:text-blue-500 transition duration-300"
-              >
-                To Know the Location
-              </a>
-              <button onClick={handleDisplayMessage} className="text-gray-800 text-lg hover:text-blue-500 transition duration-300">
+              <button onClick={handleDisplayMessage} className="text-lg hover:text-yellow-300 transition duration-300">
                 View Admin Message
               </button>
-              <NavLink to="/studentLogin" className={({ isActive }) => `text-gray-800 text-lg  hover:text-blue-500 transition duration-300 ${isActive ? 'underline' : ''}`}>
-                {!props.studnetlogin ? <span>Student Login</span> : <span onClick={() => { props.setstudentlogin(false); }}>Logout</span>}
-              </NavLink>
               {!isStaffLoggedIn ? (
-                <NavLink to="/adminlogin" onClick={() => { props.setstudentlogin(false); }} className={({ isActive }) => ` text-gray-800 text-lg  hover:text-blue-500 transition duration-300 ${isActive ? 'underline' : ''}`}>
-                  Admin-Login
+                <NavLink to="/adminlogin" className="text-lg hover:text-yellow-300 transition duration-300">
+                  Staff Login
                 </NavLink>
               ) : (
-                <button onClick={handleLogout} className=" text-gray-800 text-lg hover:text-blue-500 transition duration-300">
+                <button onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
                   Logout
                 </button>
               )}
-              <button
-                onClick={toggleMenu}
-                className="text-gray-800 text-lg hover:text-blue-500 transition duration-300"
-              >
+              {!isAdminLoggedIn ? (
+                <NavLink to="/adminmainlogin" className="text-lg hover:text-yellow-300 transition duration-300">
+                  Admin-Login
+                </NavLink>
+              ) : (
+                <button onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+                  Logout
+                </button>
+              )}
+              <button onClick={toggleMenu} className="text-lg hover:text-yellow-300 transition duration-300">
                 Close Menu
               </button>
             </div>
@@ -167,14 +153,11 @@ function Navbar(props) {
 
       {/* Modal for displaying the message */}
       {isMessageVisible && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-70">
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
           <div className="bg-white p-6 rounded shadow-lg max-w-sm">
             <h2 className="text-xl font-bold mb-4">Admin Message</h2>
             <p>{adminMessage}</p>
-            <button
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              onClick={() => setMessageVisible(false)}
-            >
+            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={() => setMessageVisible(false)}>
               Close
             </button>
           </div>

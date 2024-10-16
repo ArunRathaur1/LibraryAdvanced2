@@ -68,6 +68,8 @@ const App = () => {
                   <Route path="addadmin" element={<AddAdminMain />} />
                   <Route path="showlibraries" element={<ShowLibraries />} />
                   <Route path="addhead" element={<AddHead />} />
+                  <Route path="postmessage" element={<PostMessage/>} />
+
                     
           </Route>
           <Route path="/booksearch" element={<BookSearch/>} />

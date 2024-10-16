@@ -123,12 +123,12 @@ const AdminDashboard = () => {
               >
                 {loading ? 'Sending Emails...' : 'Send Overdue Emails'}
               </button>
-              <button
+              {/* <button
                 onClick={() => handleNavigation('/dashboard/postmessage')}
                 className="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white"
               >
                 Post Message
-              </button>
+              </button> */}
               <button
                 onClick={() => handleNavigation('/dashboard/feepayment')}
                 className="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white"
@@ -179,12 +179,12 @@ const AdminDashboard = () => {
             {loading ? 'Sending Emails...' : 'Send Overdue Emails'}
           </button>
           {/* Button to navigate to Post Message page */}
-          <button
+          {/* <button
             onClick={() => handleNavigation('/dashboard/postmessage')}
             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition w-full md:w-auto"
           >
             Post Message
-          </button>
+          </button> */}
 
           {/* New Button for Fee Payment */}
           <button
