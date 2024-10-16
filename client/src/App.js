@@ -66,7 +66,7 @@ const App = () => {
           <Route path='/adminmainhome' element={<AdminMainHome></AdminMainHome>} >
                   <Route path="addlibrary" element={<CreateLibrary />} /> 
                   <Route path="addadmin" element={<AddAdminMain />} />
-                  <Route path="showlibraries" element={<ShowLibraries />} />
+                  <Route path="" element={<ShowLibraries />} />
                   <Route path="addhead" element={<AddHead />} />
                   <Route path="postmessage" element={<PostMessage/>} />
 

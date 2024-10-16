@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const Book = require('../models/Book');
 const jwt = require('jsonwebtoken');
 const verifyAdmin = require('../middleware/checkadmin');
 const AdminMain = require('../models/adminmain'); // Import the Admin_Main model
@@ -154,7 +155,54 @@ router.get('/libraries', async (req, res) => {
   }
 });
 
+router.get('/allbooks', async (req, res) => {
+  try {
+    // Fetch all books
+    let books = await Book.find();
+    // Fetch all libraries
+    let libraries = await Library.find();
+    console.log(libraries);
+    // Loop over each book and append matching library details
+    books = books.map(book => {
+      // Find the matching library by the book's libraryId
+      const library = libraries.find(lib => lib.uniqueId === book.libraryId);
+      
+      if (library) {
+        // Convert Mongoose document to plain object
+        book = book.toObject();
+        
+        // Add the library details to the book object
+        book.libraryDetails = {
+          librarianName: library.librarianName,
+          email: library.email,
+          contactNumber: library.contactNumber,
+          libraryName: library.libraryName,
+          libraryCity: library.libraryCity,
+        };
+      }
+      return book;
+    });
 
+    // Respond with the combined books and library data
+    res.status(200).json(books);
+  } catch (error) {
+    // Handle any errors during the fetch operation
+    res.status(500).json({ message: 'Error fetching books and libraries', error });
+  }
+});
+
+router.get('/books', verifyAdmin, async (req, res) => {
+  try {
+    // Retrieve the libraryId from the admin making the request
+    const libraryId = req.admin.libraryId;
+
+    // Fetch all books that belong to the same libraryId
+    const books = await Book.find({ libraryId }); 
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching books', error: error.message });
+  }
+});
 
 
 

@@ -15,7 +15,7 @@ export default function AdminNavbar() {
           <Link to="/adminmainhome/addadmin" className="text-white text-lg font-semibold hover:text-gray-300">
             Add Admins
           </Link>
-          <Link to="/adminmainhome/showlibraries" className="text-white text-lg font-semibold hover:text-gray-300">
+          <Link to="/adminmainhome" className="text-white text-lg font-semibold hover:text-gray-300">
             Show Libraries
           </Link>
           <Link to="/adminmainhome/postmessage" className="text-white text-lg font-semibold hover:text-gray-300">
