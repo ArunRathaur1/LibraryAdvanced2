@@ -31,6 +31,7 @@ import AddAdminMain from './components/AdminMain/AddAdminMain';
 import ShowLibraries from './components/AdminMain/ShowLibraries';
 import AddHead from './components/AdminMain/AddHead';
 import BookSearchAll from './components/BookSearchAll';
+import StaffMesage from './components/Admin/StaffMessage';
 // import SendOverdueEmailsButton from './components/SendOverdueEmailsButton';
 
 const App = () => {
@@ -58,9 +59,9 @@ const App = () => {
               <Route path="updateDetails" element={<UpdateDetails data={data} />} />
               <Route path="updateStudentDetails" element={<UpdateStudentDetails studentdata={studentdata} />} />
               <Route path="issuedbooks" element={<IssuedBooks/>} />
-              <Route path="postmessage" element={<PostMessage/>} />
               <Route path="feepayment" element={<FeePayment/>} />
               <Route path='showStudentDetail' element={<StudentDetails student={studentdatatoadmin} ></StudentDetails>}></Route>
+              <Route path="staffMessage" element={<StaffMesage/>} />
               {/* <Route path="overdue" element={<SendOverdueEmailsButton/>} /> */}
           </Route>
           <Route path='/adminmainhome' element={<AdminMainHome></AdminMainHome>} >
