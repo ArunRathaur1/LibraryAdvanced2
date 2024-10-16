@@ -89,9 +89,9 @@ function Navbar(props) {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-8">
-          <NavLink to="/info" onClick={handleLogout} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
+          {/* <NavLink to="/info" onClick={handleLogout} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
             Info
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/studentLogin" onClick={handleLogout} className={({ isActive }) => `text-lg hover:text-yellow-300 transition duration-300 ${isActive ? 'underline' : ''}`}>
             {!props.studnetlogin ? <span>Student Login</span> : <span>Logout</span>}
           </NavLink>
