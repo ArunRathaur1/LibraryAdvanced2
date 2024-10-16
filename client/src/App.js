@@ -31,6 +31,7 @@ import AddAdminMain from './components/AdminMain/AddAdminMain';
 import ShowLibraries from './components/AdminMain/ShowLibraries';
 import AddHead from './components/AdminMain/AddHead';
 import BookSearchAll from './components/BookSearchAll';
+import Reports from './components/AdminMain/Reports';
 // import SendOverdueEmailsButton from './components/SendOverdueEmailsButton';
 
 const App = () => {
@@ -69,6 +70,8 @@ const App = () => {
                   <Route path="" element={<ShowLibraries />} />
                   <Route path="addhead" element={<AddHead />} />
                   <Route path="postmessage" element={<PostMessage/>} />
+                  <Route path="show-reports" element={<Reports/>} />
+
 
                     
           </Route>

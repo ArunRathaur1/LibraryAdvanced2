@@ -9,6 +9,10 @@ const adminRoutes=require('./routes/admin');
 const student=require('./routes/student');
 const adminmain=require('./routes/admin_main');
 const books=require('./routes/books');
+// server.js or index.js (main server file)
+// const reportRoutes = require('./routes/report');
+// app.use('/api', reportRoutes);
+
 require('dotenv').config(); // Load environment variables
 
 const app = express();
@@ -32,5 +36,7 @@ app.use('/library',adminRoutes);
 app.use('/library',student);
 app.use('/library',books);
 app.use('/library',adminmain);
+// app.use('/library',reportRoutes);
+
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

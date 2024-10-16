@@ -9,7 +9,7 @@ export default function AdminNavbar() {
           <Link to="/adminmainhome/addlibrary" className="text-white text-lg font-semibold hover:text-gray-300">
             Add Library
           </Link>
-          <Link to="/show-reports" className="text-white text-lg font-semibold hover:text-gray-300">
+          <Link to="/adminmainhome/show-reports" className="text-white text-lg font-semibold hover:text-gray-300">
             Show Reports
           </Link>
           <Link to="/adminmainhome/addadmin" className="text-white text-lg font-semibold hover:text-gray-300">

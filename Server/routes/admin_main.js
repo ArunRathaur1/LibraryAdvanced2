@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const verifyAdmin = require('../middleware/checkadmin');
 const AdminMain = require('../models/adminmain'); // Import the Admin_Main model
 const Library=require('../models/library');
+const Student=require('../models/Student')
 const router = express.Router();
 
 
@@ -201,6 +202,31 @@ router.get('/books', verifyAdmin, async (req, res) => {
     res.json(books);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching books', error: error.message });
+  }
+});
+
+router.get('/report', async (req, res) => {
+  try {
+    const libraries = await Library.find();
+
+    // Aggregate data for each library
+    const libraryData = await Promise.all(libraries.map(async (library) => {
+      const bookCount = await Book.countDocuments({ libraryId: library.libraryId, deleted: false });
+      const studentCount = await Student.countDocuments({ libraryId: library.libraryId });
+
+      return {
+        libraryName: library.libraryName,
+        libraryId: library.libraryId,
+        city: library.libraryCity,
+        totalBooks: bookCount,
+        totalStudents: studentCount,
+      };
+    }));
+
+    res.json(libraryData);
+  } catch (error) {
+    console.error('Error fetching report data:', error);
+    res.status(500).json({ error: 'Failed to fetch report data' });
   }
 });
 
