@@ -208,23 +208,27 @@ router.get('/books', verifyAdmin, async (req, res) => {
 router.get('/report', async (req, res) => {
   try {
     const libraries = await Library.find();
+    const books = await Book.find();
+    const students = await Student.find();
 
     // Aggregate data for each library
-    const libraryData = await Promise.all(libraries.map(async (library) => {
-      const bookCount = await Book.countDocuments({ libraryId: library.libraryId, deleted: false });
-      const studentCount = await Student.countDocuments({ libraryId: library.libraryId });
+    const libraryData = libraries.map(library => {
+      // Filter books by libraryId and count them
+      const totalBooks = books.filter(book => book.libraryId === library.uniqueId && !book.deleted).length;
+
+      // Filter students by libraryId and count them
+      const totalStudents = students.filter(student => student.libraryId === library.uniqueId).length;
 
       return {
         libraryName: library.libraryName,
-        libraryId: library.libraryId,
         city: library.libraryCity,
-        uniqueId:library.uniqueId,
-        totalBooks: bookCount,
-        totalStudents: studentCount,
+        uniqueId: library.uniqueId,
+        totalBooks: totalBooks,
+        totalStudents: totalStudents
       };
-    }));
+    });
 
-    res.json(libraryData);
+    res.json({ libraries: libraryData });
   } catch (error) {
     console.error('Error fetching report data:', error);
     res.status(500).json({ error: 'Failed to fetch report data' });

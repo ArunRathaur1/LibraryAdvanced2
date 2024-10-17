@@ -8,7 +8,8 @@ function Reports() {
       try {
         const response = await fetch('http://localhost:5000/library/report');
         const data = await response.json();
-        setReportData(data);
+        console.log('Report data:', data);
+        setReportData(data.libraries);
       } catch (error) {
         console.error('Error fetching report data:', error);
       }
