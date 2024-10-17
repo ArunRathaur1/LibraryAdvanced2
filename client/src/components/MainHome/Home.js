@@ -4,7 +4,7 @@ import img1 from '../../assets/slideshow/3.jpeg';
 import img2 from '../../assets/slideshow/4.jpeg';
 import img3 from '../../assets/slideshow/7.jpeg';
 import img4 from '../../assets/slideshow/8.jpg';
-import img5 from '../../assets/slideshow/9.jpg'; // This will be used as the logo in the footer
+import img5 from '../../assets/slideshow/9.jpg';
 import img6 from '../../assets/slideshow/10.jpg';
 import img7 from '../../assets/slideshow/11.jpg';
 import img8 from '../../assets/slideshow/12.jpg';
@@ -48,12 +48,11 @@ export default function MainHome() {
 
     try {
       const response = await axios.get(`http://localhost:5000/library/libraries?city=${district}`);
-      setLibraries(response.data); // Set the libraries fetched from the server
+      setLibraries(response.data); 
     } catch (error) {
       console.error('Error fetching libraries:', error);
     }
   };
-
 
   const handleNext = () => {
     sliderRef.current.slickNext();
@@ -64,10 +63,20 @@ export default function MainHome() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50">
-      {/* Slideshow and Additional Images Section */}
-      <div className="flex w-full py-8">
-        <div className="flex-grow p-2 w-1/2 relative">
+    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-blue-50 to-white">
+      {/* Introduction Section */}
+      <div className="w-full py-12 bg-gradient-to-r from-blue-500 to-green-500 text-white text-center shadow-lg">
+        <h1 className="text-4xl font-bold mb-4">Welcome to Chhattisgarh Library Portal</h1>
+        <p className="max-w-3xl mx-auto text-lg">
+          Discover a vast collection of books and resources from libraries across Chhattisgarh. Our platform aims to make knowledge accessible to everyone, 
+          enabling you to search, explore, and connect with libraries in your city.
+        </p>
+      </div>
+
+      {/* Slideshow and Contributors Section */}
+      <div className="flex flex-col lg:flex-row w-full py-8 px-4 gap-8">
+        {/* Slideshow */}
+        <div className="flex-grow p-2 lg:w-1/2 relative">
           <Slider ref={sliderRef} {...settings}>
             {images.map((img, index) => (
               <div key={index} className="flex justify-center">
@@ -93,50 +102,18 @@ export default function MainHome() {
 
         {/* Contributors Section */}
         <div
-          className="w-1/2 p-4 flex flex-col items-center bg-white rounded-lg shadow-lg relative overflow-hidden bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${maps})`, // Background image for the contributors section
-          }}
+          className="lg:w-1/2 p-6 bg-cover bg-center rounded-lg shadow-lg relative overflow-hidden flex flex-col items-center"
+          style={{ backgroundImage: `url(${maps})` }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-60"></div> {/* Semi-transparent overlay */}
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
           <h2 className="text-lg mb-4 font-semibold text-white relative z-10">Special Contributors</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 relative z-10">
-            <div className="text-center">
-              <img
-                src={cm}
-                alt="Vishnu Deo Sai"
-                className="rounded-full border border-gray-200 shadow-md"
-                style={{ width: '150px', height: '150px' }}
-              />
-              <div className="mt-2 text-white font-medium">Vishnu Deo Sai</div>
-            </div>
-            <div className="text-center">
-              <img
-                src={cto2}
-                alt="Gaurav Kumar Singh"
-                className="rounded-full border border-gray-200 shadow-md"
-                style={{ width: '150px', height: '150px' }}
-              />
-              <div className="mt-2 text-white font-medium">Gaurav Kumar Singh</div>
-            </div>
-            <div className="text-center">
-              <img
-                src={ceo}
-                alt="Vishwadeep"
-                className="rounded-full border border-gray-200 shadow-md"
-                style={{ width: '150px', height: '150px' }}
-              />
-              <div className="mt-2 text-white font-medium">Vishwadeep</div>
-            </div>
-            <div className="text-center">
-              <img
-                src={kedar}
-                alt="Kedar Patel"
-                className="rounded-full border border-gray-200 shadow-md"
-                style={{ width: '150px', height: '150px' }}
-              />
-              <div className="mt-2 text-white font-medium">Kedar Patel</div>
-            </div>
+          <div className="grid grid-cols-2 gap-6 relative z-10">
+            {[{img: cm, name: 'Vishnu Deo Sai'}, {img: cto2, name: 'Gaurav Kumar Singh'}, {img: ceo, name: 'Vishwadeep'}, {img: kedar, name: 'Kedar Patel'}].map((contributor, idx) => (
+              <div key={idx} className="text-center">
+                <img src={contributor.img} alt={contributor.name} className="rounded-full border border-gray-200 shadow-md w-24 h-24" />
+                <div className="mt-2 text-white font-medium">{contributor.name}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -156,27 +133,27 @@ export default function MainHome() {
         </select>
 
         {/* Display libraries of the selected district */}
-{libraries.length > 0 ? (
-  <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
-    <h3 className="text-lg font-semibold">Libraries in {selectedDistrict}:</h3>
-    <ul>
-      {libraries.map((library, index) => (
-        <li key={index} className="mt-2">
-          <span className="font-medium">{library.libraryName}</span> - <span className="text-gray-500">ID: {library.uniqueId}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-) : selectedDistrict && (
-  <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
-    <p>No libraries found in {selectedDistrict}.</p>
-  </div>
-)}
+        {libraries.length > 0 ? (
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
+            <h3 className="text-lg font-semibold">Libraries in {selectedDistrict}:</h3>
+            <ul>
+              {libraries.map((library, index) => (
+                <li key={index} className="mt-2">
+                  <span className="font-medium">{library.libraryName}</span> - <span className="text-gray-500">ID: {library.uniqueId}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : selectedDistrict && (
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
+            <p>No libraries found in {selectedDistrict}.</p>
+          </div>
+        )}
       </div>
 
       {/* Footer Section */}
-      <footer className="w-full py-4 mt-12 bg-gray-800 text-white flex items-center justify-center">
-        <img src={logo} alt="CG Government Logo" className="w-10 h-10 mr-2" />
+      <footer className="w-full py-4 mt-12 bg-gray-800 text-white flex flex-col items-center justify-center">
+        <img src={logo} alt="CG Government Logo" className="w-12 h-12 mb-2" />
         <p className="text-sm">All rights reserved by Chhattisgarh Government © 2024</p>
       </footer>
     </div>

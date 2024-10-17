@@ -48,8 +48,8 @@ function Navbar(props) {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-blue-500 shadow-md z-10">
-      <nav className="container mx-auto px-4 py-3 flex justify-between items-center text-white relative z-10">
+    <div className="bg-white shadow-md z-10">
+      <nav className="container mx-auto px-4 py-3 flex justify-between items-center text-black relative z-10">
         {/* Logo and Home Link */}
         <div className="flex items-center">
           <img
@@ -58,7 +58,7 @@ function Navbar(props) {
             className="w-12 h-12 rounded-full mr-3 object-cover"
           />
           <Link
-            className="text-2xl font-bold hover:text-yellow-300 transition duration-300"
+            className="text-2xl font-bold hover:text-blue-500 transition duration-300"
             to="/"
             onClick={handleLogout}
           >
@@ -68,7 +68,7 @@ function Navbar(props) {
 
         {/* Hamburger Menu for Mobile */}
         <div className="lg:hidden">
-          <button onClick={toggleMenu} aria-expanded={isMenuOpen} aria-label="Toggle menu" className="text-white focus:outline-none">
+          <button onClick={toggleMenu} aria-expanded={isMenuOpen} aria-label="Toggle menu" className="text-black focus:outline-none">
             <svg
               className="w-8 h-8"
               fill="none"
@@ -83,30 +83,30 @@ function Navbar(props) {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-8">
-          <NavLink to="/studentLogin" onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+          <NavLink to="/studentLogin" onClick={handleLogout} className="text-lg hover:text-blue-500 transition duration-300">
             {!props.studnetlogin ? 'Student Login' : 'Logout'}
           </NavLink>
-          <NavLink to="/booksearchall" className="text-lg hover:text-yellow-300 transition duration-300">
+          <NavLink to="/booksearchall" className="text-lg hover:text-blue-500 transition duration-300">
             Book-Search
           </NavLink>
-          <button onClick={handleDisplayMessage} className="text-lg hover:text-yellow-300 transition duration-300">
+          <button onClick={handleDisplayMessage} className="text-lg hover:text-blue-500 transition duration-300">
             View Admin Message
           </button>
           {!isStaffLoggedIn ? (
-            <NavLink to="/adminlogin" className="text-lg hover:text-yellow-300 transition duration-300">
+            <NavLink to="/adminlogin" className="text-lg hover:text-blue-500 transition duration-300">
               Staff Login
             </NavLink>
           ) : (
-            <button onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+            <button onClick={handleLogout} className="text-lg hover:text-blue-500 transition duration-300">
               Logout
             </button>
           )}
           {!isAdminLoggedIn ? (
-            <NavLink to="/adminmainlogin" className="text-lg hover:text-yellow-300 transition duration-300">
+            <NavLink to="/adminmainlogin" className="text-lg hover:text-blue-500 transition duration-300">
               Admin-Login
             </NavLink>
           ) : (
-            <button onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+            <button onClick={handleLogout} className="text-lg hover:text-blue-500 transition duration-300">
               Logout
             </button>
           )}
@@ -114,36 +114,36 @@ function Navbar(props) {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-16 left-0 w-full bg-blue-500 shadow-lg z-10">
-            <div className="flex flex-col items-center py-4 space-y-4 text-white">
-              <NavLink to="/studentLogin" onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+          <div className="lg:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-10">
+            <div className="flex flex-col items-center py-4 space-y-4 text-black">
+              <NavLink to="/studentLogin" onClick={handleLogout} className="text-lg hover:text-blue-500 transition duration-300">
                 {!props.studnetlogin ? 'Student Login' : 'Logout'}
               </NavLink>
-              <NavLink to="/booksearchall" className="text-lg hover:text-yellow-300 transition duration-300">
+              <NavLink to="/booksearchall" className="text-lg hover:text-blue-500 transition duration-300">
                 Book-Search
               </NavLink>
-              <button onClick={handleDisplayMessage} className="text-lg hover:text-yellow-300 transition duration-300">
+              <button onClick={handleDisplayMessage} className="text-lg hover:text-blue-500 transition duration-300">
                 View Admin Message
               </button>
               {!isStaffLoggedIn ? (
-                <NavLink to="/adminlogin" className="text-lg hover:text-yellow-300 transition duration-300">
+                <NavLink to="/adminlogin" className="text-lg hover:text-blue-500 transition duration-300">
                   Staff Login
                 </NavLink>
               ) : (
-                <button onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+                <button onClick={handleLogout} className="text-lg hover:text-blue-500 transition duration-300">
                   Logout
                 </button>
               )}
               {!isAdminLoggedIn ? (
-                <NavLink to="/adminmainlogin" className="text-lg hover:text-yellow-300 transition duration-300">
+                <NavLink to="/adminmainlogin" className="text-lg hover:text-blue-500 transition duration-300">
                   Admin-Login
                 </NavLink>
               ) : (
-                <button onClick={handleLogout} className="text-lg hover:text-yellow-300 transition duration-300">
+                <button onClick={handleLogout} className="text-lg hover:text-blue-500 transition duration-300">
                   Logout
                 </button>
               )}
-              <button onClick={toggleMenu} className="text-lg hover:text-yellow-300 transition duration-300">
+              <button onClick={toggleMenu} className="text-lg hover:text-blue-500 transition duration-300">
                 Close Menu
               </button>
             </div>
