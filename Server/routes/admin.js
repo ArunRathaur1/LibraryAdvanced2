@@ -11,11 +11,42 @@ const nodemailer = require('nodemailer');
 const cron = require('node-cron');
 const router = express.Router();
 const twilio = require('twilio');
+const StaffMessage=require('../models/StaffMesage.js');
 require('dotenv').config();
 const accountSid = process.env.TWILIO_ACCOUNT_SID; 
 const authToken = process.env.TWILIO_AUTH_TOKEN; 
 const client = twilio(accountSid, authToken);
 const yourWhatsAppNumber = process.env.TWILIO_WHATSAPP_NUMBER;
+
+
+//Route to add a staff Mesage that takes message and libraryId and if message with same liraryId found then update the message
+router.post('/staffmessage',verifyAdmin, async (req, res) => {
+  const { message } = req.body;
+  const libraryId = req.admin.libraryId;
+  try {
+    // Update the existing message or create a new one if it doesn't exist
+    const updatedMessage = await StaffMessage.findOneAndUpdate(
+      {libraryId:libraryId}, // Empty filter will find the first document
+      { message: message,libraryId:libraryId }, // Set the new message
+      { upsert: true, new: true } // Upsert and return the updated document
+    );
+    res.status(200).json(updatedMessage);
+  } catch (error) {
+    console.error('Error updating message:', error);
+    res.status(500).json({ error: 'Error updating the message' });
+  }
+});
+
+//Make a get request to get the staff message take libraryId from the request body
+router.post('/getstaffmessage', async (req, res) => {
+  const { libraryId } = req.body;
+  try {
+    const message = await StaffMessage.findOne({libraryId:libraryId});
+    res.status(200).json(message);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching the message' });
+  }
+});
 
 router.post('/add-admin',verifyAdmin, async (req, res) => {
     const { username, password } = req.body;
@@ -320,6 +351,7 @@ router.put('/students/:id', verifyAdmin, async (req, res) => {
           feeStatus: student.feeStatus || 'No payment information available', // Include fee status
           issued_books: currentlyIssuedBooks,
           bookHistory: fullHistory,
+          libraryId: student.libraryId,
         },
       });
     } catch (error) {

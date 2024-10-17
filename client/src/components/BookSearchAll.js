@@ -91,6 +91,7 @@ export default function BookSearchAll() {
             <th className="py-4 px-6 text-left">Author</th>
             <th className="py-4 px-6 text-left">Genre</th>
             <th className="py-4 px-6 text-left">Library Name</th>
+            <th className="py-4 px-6 text-left">City Name</th>
             <th className="py-4 px-6 text-left">Library Code</th>
             <th className="py-4 px-6 text-left">Published Date</th>
           </tr>
@@ -108,6 +109,7 @@ export default function BookSearchAll() {
                 <td className="py-4 px-6 text-left">{book.author}</td>
                 <td className="py-4 px-6 text-left">{book.genre}</td>
                 <td className="py-4 px-6 text-left">{book.libraryDetails.libraryName}</td>
+                <td className="py-4 px-6 text-left">{book.libraryDetails.libraryCity}</td>
                 <td className="py-4 px-6 text-left">{book.libraryId}</td>
                 <td className="py-4 px-6 text-left">{book.published_date}</td>
               </tr>

@@ -30,6 +30,7 @@ export default function StudentLogin(props) {
         // Success: Reset error message, set login details, and navigate to the dashboard
         setErrorMessage('');
         props.setdetails(data.student);
+        console.log(data.student);
         props.setstudentlogin(true);
         navigate('/studentDashboard');
       } else {

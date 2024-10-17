@@ -157,6 +157,7 @@ router.get('/students', verifyAdmin, async (req, res) => {
           entrydate:student.entrydate,
           bookHistory: fullHistory,
           feeStatus: student.feeStatus || 'No payment information available',
+          libraryId: student.libraryId,
         },
       });
     } catch (error) {
