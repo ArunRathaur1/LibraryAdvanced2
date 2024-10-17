@@ -6,6 +6,7 @@ import logo from '../../assets/People/5.jpeg';
 function Navbar(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [adminMessage, setAdminMessage] = useState('');
+  const [uploadedFile, setUploadedFile] = useState(null);
   const [isMessageVisible, setMessageVisible] = useState(false);
   const navigate = useNavigate();
   const [isAdminLoggedIn, setAdminLogin] = useState(false);
@@ -37,7 +38,8 @@ function Navbar(props) {
       if (response.ok) {
         const data = await response.json();
         setAdminMessage(data.message);
-        setMessageVisible(true);
+        setUploadedFile(data.filePath); // Set the uploaded file path if available
+        setMessageVisible(true); // Show the modal with the message
       } else {
         setAdminMessage('Failed to fetch the message.');
       }
@@ -157,6 +159,18 @@ function Navbar(props) {
           <div className="bg-white p-6 rounded shadow-lg max-w-sm">
             <h2 className="text-xl font-bold mb-4">Admin Message</h2>
             <p>{adminMessage}</p>
+            {uploadedFile && (
+              <div className="mt-4">
+                <a
+                  href={`http://localhost:5000/${uploadedFile}`} // Updated to use the correct URL
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
+                  View Uploaded File
+                </a>
+              </div>
+            )}
             <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={() => setMessageVisible(false)}>
               Close
             </button>

@@ -6,7 +6,7 @@ const verifyAdmin = require('../middleware/checkadmin');
 const AdminMain = require('../models/adminmain'); // Import the Admin_Main model
 const Library=require('../models/library');
 const Student=require('../models/Student')
-const Message=require('../models/Message');
+// const Message=require('../models/Message');
 const router = express.Router();
 
 
@@ -238,31 +238,31 @@ router.get('/report', async (req, res) => {
 
   //Message sending route
   // POST route to update the message
-  router.post('/message', async (req, res) => {
-    const { message } = req.body;
-    try {
-      // Update the existing message or create a new one if it doesn't exist
-      const updatedMessage = await Message.findOneAndUpdate(
-        {}, // Empty filter will find the first document
-        { message: message }, // Set the new message
-        { upsert: true, new: true } // Upsert and return the updated document
-      );
-      res.status(200).json(updatedMessage);
-    } catch (error) {
-      console.error('Error updating message:', error);
-      res.status(500).json({ error: 'Error updating the message' });
-    }
-  });
+  // router.post('/message', async (req, res) => {
+  //   const { message } = req.body;
+  //   try {
+  //     // Update the existing message or create a new one if it doesn't exist
+  //     const updatedMessage = await Message.findOneAndUpdate(
+  //       {}, // Empty filter will find the first document
+  //       { message: message }, // Set the new message
+  //       { upsert: true, new: true } // Upsert and return the updated document
+  //     );
+  //     res.status(200).json(updatedMessage);
+  //   } catch (error) {
+  //     console.error('Error updating message:', error);
+  //     res.status(500).json({ error: 'Error updating the message' });
+  //   }
+  // });
   
   
-    router.get('/message', async (req, res) => {
-      try {
-        const message = await Message.findOne({});
-        res.status(200).json(message);
-      } catch (error) {
-        res.status(500).json({ error: 'Error fetching the message' });
-      }
-    });
+  //   router.get('/message', async (req, res) => {
+  //     try {
+  //       const message = await Message.findOne({});
+  //       res.status(200).json(message);
+  //     } catch (error) {
+  //       res.status(500).json({ error: 'Error fetching the message' });
+  //     }
+  //   });
 
 
 
