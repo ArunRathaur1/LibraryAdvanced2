@@ -79,6 +79,12 @@ export default function StudentDashboard({ student }) {
             </div>
           </div>
 
+             {/* Staff Message */}
+             <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2">Staff Message</h3>
+            {staffMessage ? <p>{staffMessage}</p> : <p>No message available</p>}
+          </div>
+
           {/* Issued Books */}
           <div className="mb-6">
             <h3 className="text-xl font-semibold mb-2">Issued Books</h3>
@@ -128,11 +134,7 @@ export default function StudentDashboard({ student }) {
             )}
           </div>
 
-          {/* Staff Message */}
-          <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-2">Staff Message</h3>
-            {staffMessage ? <p>{staffMessage}</p> : <p>No message available</p>}
-          </div>
+       
         </div>
       </div>
     </div>
