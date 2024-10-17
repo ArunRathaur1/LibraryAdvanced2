@@ -121,7 +121,7 @@ const AddBooks = () => {
             type="text"
             value={formData.isbn}
             onChange={handleChange}
-            placeholder="Enter ISBN number"
+            placeholder="Enter libraryid then Write 'B' then give the number"
             className="border border-gray-300 p-2 w-full rounded"
             required
           />

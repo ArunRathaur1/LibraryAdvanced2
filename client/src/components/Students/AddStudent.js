@@ -125,7 +125,7 @@ const AddStudent = () => {
               type="text"
               value={formData.student_id}
               onChange={handleChange}
-              placeholder="Enter student ID"
+              placeholder="Enter Library id then write 'S' then write number"
               className="border border-gray-300 p-2 w-full rounded"
               required
             />
