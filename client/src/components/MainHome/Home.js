@@ -156,20 +156,22 @@ export default function MainHome() {
         </select>
 
         {/* Display libraries of the selected district */}
-        {libraries.length > 0 ? (
-          <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
-            <h3 className="text-lg font-semibold">Libraries in {selectedDistrict}:</h3>
-            <ul>
-              {libraries.map((library, index) => (
-                <li key={index} className="mt-2">{library.libraryName}</li>
-              ))}
-            </ul>
-          </div>
-        ) : selectedDistrict && (
-          <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
-            <p>No libraries found in {selectedDistrict}.</p>
-          </div>
-        )}
+{libraries.length > 0 ? (
+  <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
+    <h3 className="text-lg font-semibold">Libraries in {selectedDistrict}:</h3>
+    <ul>
+      {libraries.map((library, index) => (
+        <li key={index} className="mt-2">
+          <span className="font-medium">{library.libraryName}</span> - <span className="text-gray-500">ID: {library.uniqueId}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+) : selectedDistrict && (
+  <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow text-gray-700">
+    <p>No libraries found in {selectedDistrict}.</p>
+  </div>
+)}
       </div>
 
       {/* Footer Section */}
