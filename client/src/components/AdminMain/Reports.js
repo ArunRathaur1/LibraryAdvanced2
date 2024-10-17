@@ -35,7 +35,7 @@ function Reports() {
             reportData.map((library, index) => (
               <tr key={index}>
                 <td className="px-4 py-2 border-b">{library.libraryName || 'None'}</td>
-                <td className="px-4 py-2 border-b">{library.libraryId || 'None'}</td>
+                <td className="px-4 py-2 border-b">{library.uniqueId || 'None'}</td>
                 <td className="px-4 py-2 border-b">{library.city || 'None'}</td>
                 <td className="px-4 py-2 border-b">{library.totalBooks > 0 ? library.totalBooks : 'None'}</td>
                 <td className="px-4 py-2 border-b">{library.totalStudents > 0 ? library.totalStudents : 'None'}</td>

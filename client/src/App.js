@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Navbar from './components/MainHome/Navbar';
 import Info from './components/Info';
 import IssueBooks from './components/Issue/IssueBooks';
+import Reports from './components/AdminMain/Reports';
 // import BookDetails from './components/Books/BookDetails';
 // import StudentDetails from './components/Students/StudentDetails';
 import Student from './components/Students/Student';
@@ -31,6 +32,7 @@ import AddAdminMain from './components/AdminMain/AddAdminMain';
 import ShowLibraries from './components/AdminMain/ShowLibraries';
 import AddHead from './components/AdminMain/AddHead';
 import BookSearchAll from './components/BookSearchAll';
+import StaffMessage from './components/Admin/StaffMessage';
 // import SendOverdueEmailsButton from './components/SendOverdueEmailsButton';
 
 const App = () => {
@@ -60,7 +62,7 @@ const App = () => {
               <Route path="issuedbooks" element={<IssuedBooks/>} />
               <Route path="feepayment" element={<FeePayment/>} />
               <Route path='showStudentDetail' element={<StudentDetails student={studentdatatoadmin} ></StudentDetails>}></Route>
-              <Route path="staffMessage" element={<StaffMesage/>} />
+              <Route path="staffMessage" element={<StaffMessage/>} />
               {/* <Route path="overdue" element={<SendOverdueEmailsButton/>} /> */}
           </Route>
           <Route path='/adminmainhome' element={<AdminMainHome></AdminMainHome>} >

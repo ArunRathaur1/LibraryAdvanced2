@@ -218,6 +218,7 @@ router.get('/report', async (req, res) => {
         libraryName: library.libraryName,
         libraryId: library.libraryId,
         city: library.libraryCity,
+        uniqueId:library.uniqueId,
         totalBooks: bookCount,
         totalStudents: studentCount,
       };
