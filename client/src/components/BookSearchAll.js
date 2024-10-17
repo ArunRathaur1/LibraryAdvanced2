@@ -7,6 +7,7 @@ export default function BookSearchAll() {
   const [searchTitle, setSearchTitle] = useState('');
   const [genreFilter, setGenreFilter] = useState('');
   const [libraryFilter, setLibraryFilter] = useState('');
+  const [cityFilter,setcityFilter]=useState('');
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -40,6 +41,12 @@ export default function BookSearchAll() {
       );
     }
 
+    if(cityFilter){
+      filteredData = filteredData.filter((book) =>
+        book.libraryDetails.libraryCity.toLowerCase().includes(cityFilter.toLowerCase())
+      );
+    }
+
     // Filter by library name or library code
     if (libraryFilter) {
       filteredData = filteredData.filter((book) =>
@@ -49,7 +56,7 @@ export default function BookSearchAll() {
     }
 
     setFilteredBooks(filteredData);
-  }, [searchTitle, genreFilter, libraryFilter, books]);
+  }, [searchTitle, genreFilter, libraryFilter,cityFilter, books]);
 
   return (
     <div className="container mx-auto p-6  rounded-lg ">
@@ -71,6 +78,13 @@ export default function BookSearchAll() {
         placeholder="Filter by Genre"
         value={genreFilter}
         onChange={(e) => setGenreFilter(e.target.value)}
+        className="p-3 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-blue-400 w-full md:w-1/3"
+      />
+      <input
+        type="text"
+        placeholder="Filter by City"
+        value={cityFilter}
+        onChange={(e) => setcityFilter(e.target.value)}
         className="p-3 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-blue-400 w-full md:w-1/3"
       />
       <input
