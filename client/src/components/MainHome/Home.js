@@ -102,20 +102,27 @@ export default function MainHome() {
 
         {/* Contributors Section */}
         <div
-          className="lg:w-1/2 p-6 bg-cover bg-center rounded-lg shadow-lg relative overflow-hidden flex flex-col items-center"
-          style={{ backgroundImage: `url(${maps})` }}
-        >
-          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-          <h2 className="text-lg mb-4 font-semibold text-white relative z-10">Special Contributors</h2>
-          <div className="grid grid-cols-2 gap-6 relative z-10">
-            {[{img: cm, name: 'Vishnu Deo Sai'}, {img: cto2, name: 'Gaurav Kumar Singh'}, {img: ceo, name: 'Vishwadeep'}, {img: kedar, name: 'Kedar Patel'}].map((contributor, idx) => (
-              <div key={idx} className="text-center">
-                <img src={contributor.img} alt={contributor.name} className="rounded-full border border-gray-200 shadow-md w-24 h-24" />
-                <div className="mt-2 text-white font-medium">{contributor.name}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+  className="flex-grow p-4 lg:w-1/2 rounded-lg shadow-lg text-white"
+  style={{ backgroundImage: `url(${maps})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+>
+
+  
+  {/* Add translucent background with rgba */}
+  <div  style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)',display:'flex',justifyContent:'center',alignItems:'center' }}>
+    <div>
+    <h2 className="text-lg mb-4 font-semibold text-black relative z-10" style={{textAlign:"center"}}>Special Contributors</h2>
+    <div className="grid grid-cols-2 gap-6 relative z-10 p-4 rounded-lg">
+    {[{ img: cm, name: 'Vishnu Deo Sai' }, { img: cto2, name: 'Gaurav Kumar Singh' }, { img: ceo, name: 'Vishwadeep' }, { img: kedar, name: 'Kedar Patel' }].map((contributor, idx) => (
+      <div key={idx} className="text-center">
+        <img src={contributor.img} alt={contributor.name} className="rounded-full border border-gray-200 shadow-md w-24 h-24" style={{ opacity: 1 }} />
+        <div className="mt-2 text-black font-medium" style={{ opacity: 1 }}>{contributor.name}</div>
+      </div>
+    ))}
+    </div>
+    </div>
+  </div>
+</div>
+
       </div>
 
       {/* Dropdown for City Selection */}
