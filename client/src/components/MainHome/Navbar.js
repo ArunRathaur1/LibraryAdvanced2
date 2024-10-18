@@ -158,12 +158,12 @@ function Navbar(props) {
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
           <div className="bg-white p-6 rounded shadow-lg max-w-sm">
             <h2 className="text-xl font-bold mb-4">Admin Message</h2>
+            <Link to="http://localhost:5000/library/download">Updated file</Link>
             <p>{adminMessage}</p>
             {uploadedFile && (
               <div className="mt-4">
                 <a
-                  href={`http://localhost:5000/uploads/${uploadedFile}`} // Updated to use the correct URL
-                  target="_blank"
+                  href={`http://localhost:5000/library/download`} // Updated to use the correct URL
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:underline"
                 >

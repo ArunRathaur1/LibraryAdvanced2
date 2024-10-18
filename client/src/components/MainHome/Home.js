@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
+import {Link} from 'react-router-dom';
 // import img1 from '../../assets/slideshow/3.jpeg';
 // import img2 from '../../assets/slideshow/4.jpeg';
 // import img3 from '../../assets/slideshow/7.jpeg';
@@ -78,7 +79,7 @@ export default function MainHome() {
           enabling you to search, explore, and connect with libraries in your city.
         </p>
       </div>
-
+      
       {/* Slideshow and Contributors Section */}
       <div className="flex flex-col lg:flex-row w-full py-8 px-4 gap-8">
         {/* Slideshow */}

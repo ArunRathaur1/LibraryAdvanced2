@@ -67,7 +67,7 @@ const PostMessage = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="file"
               >
-                Upload an image or PDF:
+                Upload an PDF:
               </label>
               <input
                 type="file"
