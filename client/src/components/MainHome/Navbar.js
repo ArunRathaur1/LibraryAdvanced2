@@ -162,7 +162,7 @@ function Navbar(props) {
             {uploadedFile && (
               <div className="mt-4">
                 <a
-                  href={`http://localhost:5000/${uploadedFile}`} // Updated to use the correct URL
+                  href={`http://localhost:5000/uploads/${uploadedFile}`} // Updated to use the correct URL
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:underline"

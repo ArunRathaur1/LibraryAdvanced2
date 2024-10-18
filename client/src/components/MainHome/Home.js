@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
-import img1 from '../../assets/slideshow/3.jpeg';
-import img2 from '../../assets/slideshow/4.jpeg';
-import img3 from '../../assets/slideshow/7.jpeg';
+// import img1 from '../../assets/slideshow/3.jpeg';
+// import img2 from '../../assets/slideshow/4.jpeg';
+// import img3 from '../../assets/slideshow/7.jpeg';
 import img4 from '../../assets/slideshow/8.jpg';
 import img5 from '../../assets/slideshow/9.jpg';
 import img6 from '../../assets/slideshow/10.jpg';
@@ -10,6 +10,12 @@ import img7 from '../../assets/slideshow/11.jpg';
 import img8 from '../../assets/slideshow/12.jpg';
 import img9 from '../../assets/slideshow/13.jpg';
 import img10 from '../../assets/slideshow/design1.jpeg';
+import img11 from '../../assets/slideshow/14.jpg';
+import img12 from '../../assets/slideshow/15.jpg';
+import img13 from '../../assets/slideshow/16.jpg';
+import img14 from '../../assets/slideshow/17.jpg';
+import img15 from '../../assets/slideshow/18.jpg';
+import img16 from '../../assets/slideshow/13.jpg';
 import cm from '../../assets/People/cm.jpeg';
 import ceo from '../../assets/People/ceo.jpeg';
 import cto2 from '../../assets/People/collector2.jpeg';
@@ -18,7 +24,7 @@ import maps from '../../assets/People/maps.png';
 import logo from '../../assets/People/5.jpeg';
 import axios from 'axios';
 
-const images = [img1, img2, img3, img4, img6, img7, img8, img9, img10];
+const images = [img4, img6, img7, img8, img9, img10,img11,img12,img13,img14,img15,img16];
 
 const districts = [
   'Raipur', 'Bilaspur', 'Durg', 'Korba', 'Rajnandgaon', 'Jagdalpur', 'Dhamtari',
