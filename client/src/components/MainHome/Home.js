@@ -16,7 +16,15 @@ import img12 from '../../assets/slideshow/15.jpg';
 import img13 from '../../assets/slideshow/16.jpg';
 import img14 from '../../assets/slideshow/17.jpg';
 import img15 from '../../assets/slideshow/18.jpg';
-import img16 from '../../assets/slideshow/13.jpg';
+import img16 from '../../assets/slideshow/19.jpg';
+import img17 from '../../assets/slideshow/20.jpg';
+import img18 from '../../assets/slideshow/21.jpg';
+import img19 from '../../assets/slideshow/22.jpg';
+import img20 from '../../assets/slideshow/23.jpg';
+import img21 from '../../assets/slideshow/24.jpg';
+import img22 from '../../assets/slideshow/25.jpg';
+import img23 from '../../assets/slideshow/26.jpg';
+
 import cm from '../../assets/People/cm.jpeg';
 import ceo from '../../assets/People/ceo.jpeg';
 import cto2 from '../../assets/People/collector2.jpeg';
@@ -25,7 +33,7 @@ import maps from '../../assets/People/maps.png';
 import logo from '../../assets/People/5.jpeg';
 import axios from 'axios';
 
-const images = [img4, img6, img7, img8, img9, img10,img11,img12,img13,img14,img15,img16];
+const images = [img4,img10,img11, img6,img12,img7,img13,img14,img15,img16,img9,img17,img18,img19,img8,img20,img21,img22,img23];
 
 const districts = [
   'Raipur', 'Bilaspur', 'Durg', 'Korba', 'Rajnandgaon', 'Jagdalpur', 'Dhamtari',
