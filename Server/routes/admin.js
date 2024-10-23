@@ -51,7 +51,7 @@ router.post('/getstaffmessage', async (req, res) => {
 
 router.post('/add-admin',verifyAdmin, async (req, res) => {
     const { username, password } = req.body;
-    // const libraryId = req.admin.libraryId;
+    const libraryId = req.admin.libraryId;
   
     try {
       // Check if the username already exists
@@ -66,7 +66,7 @@ router.post('/add-admin',verifyAdmin, async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, salt);
   
       // Create new admin with the hashed password
-      const newAdmin = new Admin({ username, password: hashedPassword });
+      const newAdmin = new Admin({ username, password: hashedPassword ,libraryId});
       await newAdmin.save();
   
       // Generate a JWT token
