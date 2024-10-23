@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 const verifyAdmin = require('../middleware/checkadmin');
 const AdminMain = require('../models/adminmain'); // Import the Admin_Main model
 const Library=require('../models/library');
-const Student=require('../models/Student')
+const Student=require('../models/Student');
+const Order=require('../models/Order');
 // const Message=require('../models/Message');
 const router = express.Router();
 
@@ -233,6 +234,16 @@ router.get('/report', async (req, res) => {
   } catch (error) {
     console.error('Error fetching report data:', error);
     res.status(500).json({ error: 'Failed to fetch report data' });
+  }
+});
+
+router.get('/orders', async (req, res) => {
+  try {
+    const orders = await Order.find();
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 });
 

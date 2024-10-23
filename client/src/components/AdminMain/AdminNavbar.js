@@ -18,6 +18,9 @@ export default function AdminNavbar() {
           <Link to="/adminmainhome" className="text-white text-lg font-semibold hover:text-gray-300">
             Show Libraries
           </Link>
+          <Link to="/adminmainhome/view-orders" className="text-white text-lg font-semibold hover:text-gray-300">
+           View Orders
+          </Link>
           <Link to="/adminmainhome/postmessage" className="text-white text-lg font-semibold hover:text-gray-300">
            Post Message
           </Link>
