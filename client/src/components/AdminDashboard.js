@@ -172,6 +172,12 @@ const AdminDashboard = () => {
             Issued Books
           </button>
           <button
+            onClick={() => handleNavigation('/dashboard/orderbook')}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition w-full md:w-auto"
+          >
+            Order Book
+          </button>
+          <button
             onClick={handleSendOverdueEmails}
             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition w-full md:w-auto"
             disabled={loading}

@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const verifyAdmin =require('../middleware/checkadmin');
 const Student = require('../models/Student');
 const Admin=require('../models/Admin');
+const Order = require('../models/Order');
 // const Message=require('../models/Message');
 const nodemailer = require('nodemailer');
 // const Library=require('../models/Library')
@@ -50,6 +51,7 @@ router.post('/getstaffmessage', async (req, res) => {
 
 router.post('/add-admin',verifyAdmin, async (req, res) => {
     const { username, password } = req.body;
+    // const libraryId = req.admin.libraryId;
   
     try {
       // Check if the username already exists
@@ -154,6 +156,8 @@ router.post('/admin/login', async (req, res) => {
   }
 });
 
+
+
   
 
 // Admin-only routes to manage books and students
@@ -209,6 +213,26 @@ router.put('/books/:id',verifyAdmin, async (req, res) => {
       res.json({ message: 'Book marked as deleted successfully' });
     } catch (err) {
       res.status(500).json({ message: 'Error occurred while deleting the book', error: err });
+    }
+  });
+
+  router.post('/order-book', async (req, res) => {
+    const { bookName, author, qty } = req.body;
+    // const libraryId = req.admin.libraryId; // Get the libraryId from the logged-in admin
+  
+    try {
+      const newOrder = new Order({
+        bookName,
+        author,
+        // libraryId,
+        qty,
+      });
+  
+      const savedOrder = await newOrder.save();
+      res.status(201).json({ message: 'Book ordered successfully', order: savedOrder });
+    } catch (error) {
+      console.error('Error creating order:', error);
+      res.status(500).json({ message: 'Server error. Please try again later.' });
     }
   });
   
