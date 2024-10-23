@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const ViewOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -17,9 +18,26 @@ const ViewOrders = () => {
     fetchOrders();
   }, []);
 
+  // Function to filter orders based on the search term
+  const filteredOrders = orders.filter(order =>
+    order.bookName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="p-4 md:p-6 bg-gradient-to-r from-white-50 to-white-100 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-center">Ordered Books</h2>
+      
+      {/* Search Input */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search by Book Name"
+          className="border border-gray-300 rounded p-2 w-full"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
           <thead>
@@ -31,8 +49,8 @@ const ViewOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.length > 0 ? (
-              orders.map((order) => (
+            {filteredOrders.length > 0 ? (
+              filteredOrders.map((order) => (
                 <tr key={order._id} className="hover:bg-gray-100">
                   <td className="py-2 px-4 border-b border-gray-300">{order.bookName}</td>
                   <td className="py-2 px-4 border-b border-gray-300">{order.author}</td>
