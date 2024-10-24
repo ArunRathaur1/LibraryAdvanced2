@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import img1 from '../../assets/slideshow/3.jpeg';
 // import img2 from '../../assets/slideshow/4.jpeg';
 // import img3 from '../../assets/slideshow/7.jpeg';
@@ -25,6 +25,13 @@ import img21 from '../../assets/slideshow/24.jpg';
 import img22 from '../../assets/slideshow/25.jpg';
 import img23 from '../../assets/slideshow/26.jpg';
 
+import cg from '../../assets/Extra/cg.png';
+import digital from '../../assets/Extra/digital.png';
+import indiagov from '../../assets/Extra/indiagov.png';
+import jansampark from '../../assets/Extra/jansampark.png';
+import nic from '../../assets/Extra/nic.png';
+import police from '../../assets/Extra/police.png';
+
 import cm from '../../assets/People/cm.jpeg';
 import ceo from '../../assets/People/ceo.jpeg';
 import cto2 from '../../assets/People/collector2.jpeg';
@@ -33,7 +40,7 @@ import maps from '../../assets/People/maps.png';
 import logo from '../../assets/People/5.jpeg';
 import axios from 'axios';
 
-const images = [img4,img10,img11, img6,img12,img7,img13,img14,img15,img16,img9,img17,img18,img19,img8,img20,img21,img22,img23];
+const images = [img4, img10, img11, img6, img12, img7, img13, img14, img15, img16, img9, img17, img18, img19, img8, img20, img21, img22, img23];
 
 const districts = [
   'Raipur', 'Bilaspur', 'Durg', 'Korba', 'Rajnandgaon', 'Jagdalpur', 'Dhamtari',
@@ -117,27 +124,23 @@ export default function MainHome() {
 
         {/* Contributors Section */}
         <div
-  className="flex-grow p-4 lg:w-1/2 rounded-lg shadow-lg text-white"
-  style={{ backgroundImage: `url(${maps})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
->
-
-  
-  {/* Add translucent background with rgba */}
-  <div  style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)',display:'flex',justifyContent:'center',alignItems:'center' }}>
-    <div>
-    <h2 className="text-lg mb-4 font-semibold text-black relative z-10" style={{textAlign:"center"}}>Special Contributors</h2>
-    <div className="grid grid-cols-2 gap-6 relative z-10 p-4 rounded-lg">
-    {[{ img: cm, name: 'Vishnu Deo Sai' }, { img: cto2, name: 'Gaurav Kumar Singh' }, { img: ceo, name: 'Vishwadeep' }, { img: kedar, name: 'Kedar Patel' }].map((contributor, idx) => (
-      <div key={idx} className="text-center">
-        <img src={contributor.img} alt={contributor.name} className="rounded-full border border-gray-200 shadow-md w-24 h-24" style={{ opacity: 1 }} />
-        <div className="mt-2 text-black font-medium" style={{ opacity: 1 }}>{contributor.name}</div>
-      </div>
-    ))}
-    </div>
-    </div>
-  </div>
-</div>
-
+          className="flex-grow p-4 lg:w-1/2 rounded-lg shadow-lg text-white"
+          style={{ backgroundImage: `url(${maps})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        >
+          <div  style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)',display:'flex',justifyContent:'center',alignItems:'center' }}>
+            <div>
+              <h2 className="text-lg mb-4 font-semibold text-black relative z-10" style={{textAlign:"center"}}>Special Contributors</h2>
+              <div className="grid grid-cols-2 gap-6 relative z-10 p-4 rounded-lg">
+                {[{ img: cm, name: 'Vishnu Deo Sai' }, { img: cto2, name: 'Gaurav Kumar Singh' }, { img: ceo, name: 'Vishwadeep' }, { img: kedar, name: 'Kedar Patel' }].map((contributor, idx) => (
+                  <div key={idx} className="text-center">
+                    <img src={contributor.img} alt={contributor.name} className="rounded-full border border-gray-200 shadow-md w-24 h-24" />
+                    <div className="mt-2 text-black font-medium">{contributor.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Dropdown for City Selection */}
@@ -173,10 +176,36 @@ export default function MainHome() {
         )}
       </div>
 
+      {/* Clickable Photos with Links Section */}
+      <div className="w-full p-6 mt-8 bg-white rounded-lg shadow-lg text-center">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Visit Other Websites</h2>
+        <div className="flex justify-center space-x-4">
+          {/* Add clickable photos here */}
+          <a href="https://cgstate.gov.in/" target="_blank" rel="noopener noreferrer">
+            <img src={cg} alt="Website 1" className="w-30 h-24 object-cover rounded-lg shadow-lg hover:opacity-75" />
+          </a>
+          <a href="https://www.digitalindia.gov.in/" target="_blank" rel="noopener noreferrer">
+            <img src={digital} alt="Website 2" className="w-30 h-24 object-cover rounded-lg shadow-lg hover:opacity-75" />
+          </a>
+          <a href="https://www.india.gov.in/" target="_blank" rel="noopener noreferrer">
+            <img src={indiagov} alt="Website 3" className="w-30 h-24 object-cover rounded-lg shadow-lg hover:opacity-75" />
+          </a>
+          <a href="https://dprcg.gov.in/" target="_blank" rel="noopener noreferrer">
+            <img src={jansampark} alt="Website 4" className="w-30 h-24 object-cover rounded-lg shadow-lg hover:opacity-75" />
+          </a>
+          <a href="https://www.nic.in/" target="_blank" rel="noopener noreferrer">
+            <img src={nic} alt="Website 5" className="w-30 h-24 object-cover rounded-lg shadow-lg hover:opacity-75" />
+          </a>
+          <a href="https://cgpolicehelp.cgstate.gov.in/" target="_blank" rel="noopener noreferrer">
+            <img src={police} alt="Website 6" className="w-30 h-24 object-cover rounded-lg shadow-lg hover:opacity-75" />
+          </a>
+          
+        </div>
+      </div>
+
       {/* Footer Section */}
-      <footer className="w-full py-4 mt-12 bg-gray-800 text-white flex flex-col items-center justify-center">
-        <img src={logo} alt="CG Government Logo" className="w-12 h-12 mb-2" />
-        <p className="text-sm">All rights reserved by Chhattisgarh Government © 2024</p>
+      <footer className="w-full py-6 mt-8 bg-gray-800 text-center text-white">
+        <p>&copy; 2024 Chhattisgarh Library Portal. All rights reserved.</p>
       </footer>
     </div>
   );
