@@ -6,19 +6,30 @@ const ViewOrders = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/library/orders');
-        setOrders(response.data);
-      } catch (error) {
-        console.error('Error fetching orders:', error);
-      }
-    };
-
     fetchOrders();
   }, []);
 
-  // Function to filter orders based on the search term
+  // Function to fetch orders from backend
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/library/orders');
+      setOrders(response.data);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
+  };
+
+  // Function to handle deletion of an order
+  const handleDeleteOrder = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/library/orders/${id}`);
+      setOrders(orders.filter(order => order._id !== id)); // Remove order from state
+    } catch (error) {
+      console.error('Error deleting order:', error);
+    }
+  };
+
+  // Filter orders based on search term
   const filteredOrders = orders.filter(order =>
     order.bookName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -26,7 +37,7 @@ const ViewOrders = () => {
   return (
     <div className="p-4 md:p-6 bg-gradient-to-r from-white-50 to-white-100 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-center">Ordered Books</h2>
-      
+
       {/* Search Input */}
       <div className="mb-4">
         <input
@@ -46,6 +57,7 @@ const ViewOrders = () => {
               <th className="py-3 px-4 border-b border-gray-300 text-left">Author</th>
               <th className="py-3 px-4 border-b border-gray-300 text-left">Quantity</th>
               <th className="py-3 px-4 border-b border-gray-300 text-left">Ordered At</th>
+              <th className="py-3 px-4 border-b border-gray-300 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -56,11 +68,19 @@ const ViewOrders = () => {
                   <td className="py-2 px-4 border-b border-gray-300">{order.author}</td>
                   <td className="py-2 px-4 border-b border-gray-300">{order.qty}</td>
                   <td className="py-2 px-4 border-b border-gray-300">{new Date(order.orderedAt).toLocaleDateString()}</td>
+                  <td className="py-2 px-4 border-b border-gray-300">
+                    <button
+                      onClick={() => handleDeleteOrder(order._id)}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td className="py-2 px-4 border-b border-gray-300 text-center" colSpan="4">No orders found.</td>
+                <td className="py-2 px-4 border-b border-gray-300 text-center" colSpan="5">No orders found.</td>
               </tr>
             )}
           </tbody>
