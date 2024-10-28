@@ -57,6 +57,7 @@ const ViewOrders = () => {
               <th className="py-3 px-4 border-b border-gray-300 text-left">Author</th>
               <th className="py-3 px-4 border-b border-gray-300 text-left">Quantity</th>
               <th className="py-3 px-4 border-b border-gray-300 text-left">Ordered At</th>
+              <th className="py-3 px-4 border-b border-gray-300 text-left">Library</th>
               <th className="py-3 px-4 border-b border-gray-300 text-left">Actions</th>
             </tr>
           </thead>
@@ -68,6 +69,7 @@ const ViewOrders = () => {
                   <td className="py-2 px-4 border-b border-gray-300">{order.author}</td>
                   <td className="py-2 px-4 border-b border-gray-300">{order.qty}</td>
                   <td className="py-2 px-4 border-b border-gray-300">{new Date(order.orderedAt).toLocaleDateString()}</td>
+                  <td className="py-2 px-4 border-b border-gray-300">{order.libraryId}</td>
                   <td className="py-2 px-4 border-b border-gray-300">
                     <button
                       onClick={() => handleDeleteOrder(order._id)}

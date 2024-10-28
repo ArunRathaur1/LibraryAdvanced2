@@ -216,15 +216,15 @@ router.put('/books/:id',verifyAdmin, async (req, res) => {
     }
   });
 
-  router.post('/order-book', async (req, res) => {
+  router.post('/order-book',verifyAdmin, async (req, res) => {
     const { bookName, author, qty } = req.body;
-    // const libraryId = req.admin.libraryId; // Get the libraryId from the logged-in admin
+    const libraryId = req.admin.libraryId; // Get the libraryId from the logged-in admin
   
     try {
       const newOrder = new Order({
         bookName,
         author,
-        // libraryId,
+        libraryId:libraryId,
         qty,
       });
   
@@ -235,9 +235,6 @@ router.put('/books/:id',verifyAdmin, async (req, res) => {
       res.status(500).json({ message: 'Server error. Please try again later.' });
     }
   });
-
-  
-  
 
 // Route to add a new student
 router.post('/students', verifyAdmin, async (req, res) => {
