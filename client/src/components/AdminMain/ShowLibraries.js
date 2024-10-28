@@ -5,7 +5,7 @@ export default function ShowLibraries() {
   const [libraries, setLibraries] = useState([]); // State to hold library data
   const [filteredLibraries, setFilteredLibraries] = useState([]); // State for filtered library data
   const [error, setError] = useState(null); // State to hold error messages
-  const [searchCity, setSearchCity] = useState(''); // State for search by librarian name
+  const [searchCity, setSearchCity] = useState(''); // State for search by city name
   const [searchUniqueId, setSearchUniqueId] = useState(''); // State for search by unique ID
 
   useEffect(() => {
@@ -30,7 +30,9 @@ export default function ShowLibraries() {
   const filterLibraries = () => {
     const filtered = libraries.filter(library => {
       const matchesCity = library.libraryCity.toLowerCase().includes(searchCity.toLowerCase());
-      const matchesUniqueId = library.uniqueId ? library.uniqueId.toString().includes(searchUniqueId) : searchUniqueId === '';
+      const matchesUniqueId = library.uniqueId 
+        ? library.uniqueId.toLowerCase().includes(searchUniqueId.toLowerCase()) 
+        : searchUniqueId === '';
       return matchesCity && matchesUniqueId;
     });
 
